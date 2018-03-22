@@ -631,6 +631,10 @@ angular
       // content (e.g. using :before pseudo-elements).
       $('body').addClass('ios');
     }
-  });
+  })
+  .run(['$rootScope', 'APIService', 'KubevirtVersions',
+    function ($rootScope, APIService, KubevirtVersions) {
+    $rootScope.KUBEVIRT_ENABLED = !!APIService.apiInfo(KubevirtVersions.offlineVirtualMachine);
+  }]);
 
 hawtioPluginLoader.addModule('openshiftConsole');
