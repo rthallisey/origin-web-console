@@ -635,6 +635,24 @@ angular
   .run(['$rootScope', 'APIService', 'KubevirtVersions',
     function ($rootScope, APIService, KubevirtVersions) {
     $rootScope.KUBEVIRT_ENABLED = !!APIService.apiInfo(KubevirtVersions.offlineVirtualMachine);
+    if ($rootScope.KUBEVIRT_ENABLED) {
+      var virtualizationCategoryExists = _.some(window.OPENSHIFT_CONSTANTS.SERVICE_CATALOG_CATEGORIES, { 'id': 'virtualization' });
+      if (!virtualizationCategoryExists) {
+        // Add 'Virt' category and sub-categories to the Service Catalog UI
+        window.OPENSHIFT_CONSTANTS.SERVICE_CATALOG_CATEGORIES.push(
+          {
+            id: 'virtualization',
+            label: 'Virtualization',
+            subCategories: [
+              {
+                id: 'vms',
+                label: 'Virtual Machines',
+                tags: ['virtualmachine'],
+              }
+            ]
+          });
+      }
+    }
   }]);
 
 hawtioPluginLoader.addModule('openshiftConsole');
