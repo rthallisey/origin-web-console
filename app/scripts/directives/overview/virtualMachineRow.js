@@ -50,7 +50,7 @@
     row.projectName = $routeParams.project;
 
     function isOvmRunning() {
-      return row.apiObject.spec.running;
+      return row.apiObject.spec.Running;
     }
 
     function createOvmCopy() {
@@ -103,7 +103,7 @@
       if (vmPhase !== undefined) {
         return vmPhase;
       }
-      if (!_.get(ovm, '.spec.running')) {
+      if (!_.get(ovm, '.spec.Running')) {
         return "Off";
       }
       return "Unknown";
