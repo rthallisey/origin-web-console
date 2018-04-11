@@ -13946,7 +13946,7 @@ template: '<a ng-href="{{link}}" ng-transclude ng-if="link"></a><span ng-transcl
 angular.module("openshiftConsole").component("virtualMachineRow", {
 controller: [ "$scope", "$filter", "$routeParams", "APIService", "AuthorizationService", "DataService", "ListRowUtils", "Navigate", "ProjectsService", "KubevirtVersions", function(e, t, n, r, a, o, i, s, c, l) {
 function u() {
-return p.apiObject.spec.Running;
+return p.apiObject.spec.running;
 }
 function d() {
 var e = angular.copy(p.apiObject);
@@ -13982,7 +13982,7 @@ templateUrl: "views/overview/_virtual-machine-row.html"
 }), angular.module("openshiftConsole").directive("vmState", function() {
 function e(e) {
 var t = _.get(e, "_vm.status.phase");
-return void 0 !== t ? t : _.get(e, ".spec.Running") ? "Unknown" : "Off";
+return void 0 !== t ? t : _.get(e, ".spec.running") ? "Unknown" : "Off";
 }
 function t(t, n, r) {
 t.$watch("ovm", function() {
