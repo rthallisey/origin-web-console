@@ -13944,16 +13944,9 @@ template: '<a ng-href="{{link}}" ng-transclude ng-if="link"></a><span ng-transcl
 };
 }), function() {
 angular.module("openshiftConsole").component("virtualMachineRow", {
-<<<<<<< HEAD
-controller: [ "$scope", "$filter", "$routeParams", "APIService", "AuthorizationService", "DataService", "ListRowUtils", "Navigate", "ProjectsService", "KubevirtVersions", function(e, t, n, r, a, o, i, s, c, l) {
-function u() {
-return p.apiObject.spec.running;
-}
-=======
 controller: [ "$scope", "$filter", "$routeParams", "APIService", "AuthorizationService", "DataService", "ListRowUtils", "Navigate", "ProjectsService", "KubevirtVersions", "moment", function(e, t, n, r, a, o, i, s, c, l, u) {
->>>>>>> 38ff2798... Virtual Machine uptime added
 function d() {
-return f.apiObject.spec.Running;
+return f.apiObject.spec.running;
 }
 function m() {
 var e = angular.copy(f.apiObject);
@@ -13996,16 +13989,19 @@ function e(e) {
 var t = _.get(e, "_vm.status.phase");
 return void 0 !== t ? t : _.get(e, ".spec.running") ? "Unknown" : "Off";
 }
-function t(t, n, r) {
-t.$watch("ovm", function() {
-t.status = e(t.ovm);
-}), console.log("ovm", t.ovm);
+function t(t) {
+return e(t.ovm);
 }
-return t.$inject = [ "$scope", "$element", "$attrs" ], {
+function n(n) {
+n.$watch(t, function() {
+n.status = e(n.ovm);
+});
+}
+return n.$inject = [ "$scope" ], {
 scope: {
 ovm: "<"
 },
-controller: t,
+controller: n,
 templateUrl: "views/overview/_vm-status.html"
 };
 }), angular.module("openshiftConsole").constant("KubevirtVersions", {

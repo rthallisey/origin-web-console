@@ -121,12 +121,15 @@
       return "Unknown";
     }
 
-    function controller ($scope, $element, $attrs) {
+    function getOvmStatusFromScope(scope) {
+      return getOvmStatus(scope.ovm)
+    }
+
+    function controller ($scope) {
       function onOvmChange() {
         $scope.status = getOvmStatus($scope.ovm);
       }
-      $scope.$watch('ovm', onOvmChange);
-      console.log('ovm', $scope.ovm);
+      $scope.$watch(getOvmStatusFromScope, onOvmChange);
     }
 
     return {
