@@ -210,7 +210,7 @@
     return function (pod) {
       var startTime = _.get(pod, 'status.startTime');
       if (!startTime) {
-        return '-';
+        return '--';
       }
       return moment(startTime).fromNow(true);
     };
