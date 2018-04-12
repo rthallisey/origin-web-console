@@ -78795,6 +78795,11 @@ label: "Mongo",
 tags: [ "mongodb" ],
 icon: "icon-mongodb"
 }, {
+id: "mssql",
+label: "MS SQL",
+tags: [ "mssql" ],
+icon: "icon-mssql"
+}, {
 id: "mysql",
 label: "MySQL",
 tags: [ "mysql" ],
