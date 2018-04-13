@@ -925,7 +925,7 @@ function OverviewController($scope,
     _.each(overview.offlineVirtualMachines, function(ovm) {
       var ovmDomain = _.get(ovm, 'metadata.labels["kubevirt.io/domain"]');
       if (!ovmDomain) {
-        return false;
+        return;
       }
 
       var services = _.filter(state.allServices, function (service) {
