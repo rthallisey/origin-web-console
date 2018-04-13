@@ -12947,12 +12947,12 @@ angular.module('openshiftConsoleTemplates', []).run(['$templateCache', function(
     "</optional-link>\n" +
     "</h3>\n" +
     "</div>\n" +
-    "<div ng-if=\"row.state.showMetrics && (row.state.breakpoint === 'md' || row.state.breakpoint === 'lg') && row.apiObject._pod\" class=\"list-pf-details\">\n" +
+    "<div class=\"list-pf-details\" ng-if=\"!row.expanded\">\n" +
+    "<div ng-if=\"row.state.showMetrics && (row.state.breakpoint === 'md' || row.state.breakpoint === 'lg') && row.apiObject._pod\" class=\"truncate metrics-collapsed\">\n" +
     "<metrics-summary pods=\"[row.apiObject._pod]\" containers=\"row.apiObject._pod.spec.containers\">\n" +
     "</metrics-summary>\n" +
     "</div>\n" +
-    "<div class=\"list-pf-details\">\n" +
-    "<div ng-if=\"!row.expanded\" vm-state ovm=\"row.apiObject\"></div>\n" +
+    "<div vm-state ovm=\"row.apiObject\"></div>\n" +
     "</div>\n" +
     "</div>\n" +
     "<div class=\"list-pf-actions\">\n" +

@@ -13,7 +13,7 @@
         </h3>
       </div>
       <div class="list-pf-details" ng-if="!row.expanded">
-        <div ng-if="row.apiObject._pod" class="truncate metrics-collapsed">
+        <div ng-if="row.state.showMetrics && (row.state.breakpoint === 'md' || row.state.breakpoint === 'lg') && row.apiObject._pod" class="truncate metrics-collapsed">
           <metrics-summary
             pods="[row.apiObject._pod]"
             containers="row.apiObject._pod.spec.containers">
