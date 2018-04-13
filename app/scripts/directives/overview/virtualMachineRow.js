@@ -252,7 +252,11 @@
 
   angular.module('openshiftConsole').filter('podUptime', function () {
     return function (pod) {
-      var startTime = _.get(pod, 'status.startTime');
+      var computeContainerStartTime = _(pod.status.containerStatuses)
+        .filter({ name: "compute" })
+        .map('state.running.startedAt')
+        .first();
+      var startTime = computeContainerStartTime || _.get(pod, 'status.startTime');
       if (!startTime) {
         return '--';
       }
