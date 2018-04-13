@@ -932,7 +932,7 @@ function OverviewController($scope,
           var domain = _.get(service, 'spec.selector["kubevirt.io/domain"]');
           return domain === ovmDomain;
       });
-      ovm.services = services;
+      ovm._services = services;
     });
   };
 

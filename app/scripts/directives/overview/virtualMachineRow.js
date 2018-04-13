@@ -125,6 +125,7 @@
       var copy = angular.copy(row.apiObject);
       delete copy._pod;
       delete copy._vm;
+      delete copy._services;
       return copy;
     }
 
@@ -176,7 +177,7 @@
     };
     row.isRdpService = function () {
       var ovm = row.apiObject;
-      return !_.isEmpty(ovm.services);
+      return !_.isEmpty(ovm._services);
     };
 
     function rdpPortFinder(service) {
@@ -239,10 +240,10 @@
      */
     row.onOpenRemoteDesktop = function () {
       var ovm = row.apiObject;
-      if (_.isEmpty(ovm.services)) {
+      if (_.isEmpty(ovm._services)) {
         return ;
       }
-      var service = _.find(ovm.services, rdpPortFinder); // a service which one of the ports is RDP
+      var service = _.find(ovm._services, rdpPortFinder); // a service which one of the ports is RDP
       var addressPort = getAddressPort(service, ovm);
       if (addressPort) {
         fileDownload(buildRdp(addressPort.address, addressPort.port));

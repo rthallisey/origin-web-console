@@ -287,11 +287,12 @@ e.matches(r) && t.push(ye.allServices[n]);
 }, ut = function() {
 B.offlineVirtualMachines && ye.allServices && _.each(B.offlineVirtualMachines, function(e) {
 var t = _.get(e, 'metadata.labels["kubevirt.io/domain"]');
-if (!t) return !1;
+if (t) {
 var n = _.filter(ye.allServices, function(e) {
 return _.get(e, 'spec.selector["kubevirt.io/domain"]') === t;
 });
-e.services = n;
+e._services = n;
+}
 });
 }, dt = function() {
 if (ye.allServices) {
@@ -13972,7 +13973,7 @@ angular.module("openshiftConsole").component("virtualMachineRow", {
 controller: [ "$scope", "$filter", "$routeParams", "APIService", "AuthorizationService", "DataService", "ListRowUtils", "Navigate", "ProjectsService", "KubevirtVersions", "moment", function(r, a, o, i, s, c, l, u, d, m, p) {
 function f() {
 var e = angular.copy(y.apiObject);
-return delete e._pod, delete e._vm, e;
+return delete e._pod, delete e._vm, delete e._services, e;
 }
 function g(e) {
 var t = f();
@@ -14040,11 +14041,11 @@ var e = y.apiObject, t = _.get(e, 'metadata.labels["kubevirt.io/os"]');
 return t && _.startsWith(t, "win");
 }, y.isRdpService = function() {
 var e = y.apiObject;
-return !_.isEmpty(e.services);
+return !_.isEmpty(e._services);
 }, y.onOpenRemoteDesktop = function() {
 var n = y.apiObject;
-if (!_.isEmpty(n.services)) {
-var r = h(_.find(n.services, v), n);
+if (!_.isEmpty(n._services)) {
+var r = h(_.find(n._services, v), n);
 r && e(t(r.address, r.port));
 }
 };
