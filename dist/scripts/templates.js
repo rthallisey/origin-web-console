@@ -12997,12 +12997,18 @@ angular.module('openshiftConsoleTemplates', []).run(['$templateCache', function(
     "<a href=\"\" ng-if=\"row.isRdpService()\" ng-click=\"row.onOpenRemoteDesktop()\">Open Console</a>\n" +
     "<div ng-if=\"!row.isRdpService()\">No RDP service defined</div>\n" +
     "</dd>\n" +
-    "</dl>\n" +
-    "<dl class=\"dl-horizontal col-md-6\">\n" +
     "<dt>Operating System:</dt>\n" +
     "<dd>{{row.apiObject.metadata.labels['kubevirt.io/os'] || '--'}}</dd>\n" +
     "<dt>Uptime:</dt>\n" +
     "<dd>{{ row.apiObject._pod | podUptime }}</dd>\n" +
+    "</dl>\n" +
+    "<dl class=\"dl-horizontal col-md-6\">\n" +
+    "<div ng-if=\"row.apiObject._pod && row.state.showMetrics\">\n" +
+    "\n" +
+    "<deployment-metrics pods=\"[row.apiObject._pod]\" containers=\"row.apiObject._pod.spec.containers\" profile=\"compact\" alerts=\"row.state.alerts\" class=\"overview-metrics\">\n" +
+    "</deployment-metrics>\n" +
+    "<h4 class=\"h5\">Usage <small>Last 15 Minutes</small></h4>\n" +
+    "</div>\n" +
     "</dl>\n" +
     "</div>\n" +
     "</div>\n" +

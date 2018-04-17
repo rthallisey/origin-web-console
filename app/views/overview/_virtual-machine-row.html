@@ -71,13 +71,24 @@
               <div ng-if="!row.isRdpService()">No RDP service defined</div>
             </dd>
 
-          </dl>
-          <dl class="dl-horizontal col-md-6">
             <dt>Operating System:</dt>
             <dd>{{row.apiObject.metadata.labels['kubevirt.io/os'] || '--'}}</dd>
 
             <dt>Uptime:</dt>
             <dd>{{ row.apiObject._pod | podUptime }}</dd>
+          </dl>
+          <dl class="dl-horizontal col-md-6">
+            <div ng-if="row.apiObject._pod && row.state.showMetrics">
+            <!--<div ng-if="row.apiObject._pod">-->
+              <deployment-metrics
+                pods="[row.apiObject._pod]"
+                containers="row.apiObject._pod.spec.containers"
+                profile="compact"
+                alerts="row.state.alerts"
+                class="overview-metrics">
+              </deployment-metrics>
+              <h4 class="h5">Usage <small>Last 15 Minutes</small></h4>
+            </div>
           </dl>
         </div>
       </div>
